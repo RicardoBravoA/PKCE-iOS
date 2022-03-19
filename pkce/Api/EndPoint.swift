@@ -23,6 +23,6 @@ enum EndPoint {
     }
     
     var url: URL {
-        return URL(string: value)
+        return URL(string: value)!
     }
 }
