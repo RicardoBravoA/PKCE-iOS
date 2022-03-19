@@ -9,7 +9,7 @@ import Foundation
 
 class ApiClient {
     
-    class func movie(completion: @escaping (MovieResponse?, Error?) -> Void) {
+    class func movie(completion: @escaping ([MovieResponseItem]?, Error?) -> Void) {
         taskForGETRequest(url: EndPoint.movie.url, response: MovieResponse.self) { response, error in
             if let response = response {
                 completion(response, nil)
@@ -31,7 +31,13 @@ class ApiClient {
     
     class func taskForGETRequest<ResponseType: Decodable>(url: URL, response: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "GET"
+        
+        let code = self.encode(path: url.path, verb: "get", body: "{}")
+        urlRequest.addValue(code, forHTTPHeaderField: "request-id")
+        
+        let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             guard let data = data else {
                 DispatchQueue.main.async {
                     completion(nil, error)
@@ -60,12 +66,17 @@ class ApiClient {
         task.resume()
     }
     
-    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, body: RequestType, response: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
+    private class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, body: RequestType, response: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        urlRequest.httpBody = try! JSONEncoder().encode(body)
+        let bodyJson = try! JSONEncoder().encode(body)
+        
+        let code = self.encode(path: url.path, verb: "post", body: String(data: bodyJson, encoding: .utf8)!)
+        urlRequest.addValue(code, forHTTPHeaderField: "request-id")
+        
+        urlRequest.httpBody = bodyJson
         
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             guard let data = data else {
@@ -95,6 +106,16 @@ class ApiClient {
             }
         }
         task.resume()
+    }
+    
+    private class func encode(path: String, verb: String, body: String) -> String {
+        if (verb == "get") {
+            return ("\(path)\(verb)\(body)".data(using: .utf8)?.base64EncodedString())!
+        } else {
+            let newBody = body.replacingOccurrences(of: "\"", with: "")
+            return ("\(path)\(verb)\(newBody)".data(using: .utf8)?.base64EncodedString())!
+        }
+        
     }
     
 }
