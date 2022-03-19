@@ -19,6 +19,7 @@
 		C624BBFF27E5BB6200B8AC8B /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C624BBFE27E5BB6200B8AC8B /* EndPoint.swift */; };
 		C624BC0427E5BD4100B8AC8B /* TransactionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C624BC0327E5BD4100B8AC8B /* TransactionRequest.swift */; };
 		C624BC0627E5BD8400B8AC8B /* TransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C624BC0527E5BD8400B8AC8B /* TransactionResponse.swift */; };
+		C624BC0827E5BDC200B8AC8B /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C624BC0727E5BDC200B8AC8B /* MovieResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		C624BBFE27E5BB6200B8AC8B /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		C624BC0327E5BD4100B8AC8B /* TransactionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRequest.swift; sourceTree = "<group>"; };
 		C624BC0527E5BD8400B8AC8B /* TransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionResponse.swift; sourceTree = "<group>"; };
+		C624BC0727E5BDC200B8AC8B /* MovieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				C624BC0527E5BD8400B8AC8B /* TransactionResponse.swift */,
+				C624BC0727E5BDC200B8AC8B /* MovieResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C624BC0827E5BDC200B8AC8B /* MovieResponse.swift in Sources */,
 				C624BC0427E5BD4100B8AC8B /* TransactionRequest.swift in Sources */,
 				C624BBD127E5B73600B8AC8B /* ViewController.swift in Sources */,
 				C624BBCD27E5B73600B8AC8B /* AppDelegate.swift in Sources */,
