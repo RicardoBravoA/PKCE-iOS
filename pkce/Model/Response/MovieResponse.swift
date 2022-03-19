@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct MovieResponse: Codable {
-    let results: [MovieResponseItem]
-}
+typealias MovieResponse = [MovieResponseItem]
 
 struct MovieResponseItem: Codable {
     let id: Int
     let title: String
-    let diector: String
+    let director: String
+    let year: Int
+    let rating: Double
 }
