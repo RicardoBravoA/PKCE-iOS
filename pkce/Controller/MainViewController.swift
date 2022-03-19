@@ -24,7 +24,7 @@ class MainViewController: UIViewController {
             if error != nil {
                 self.text.text = error?.localizedDescription ?? "Error..."
             } else {
-                self.text.text = "\(String(describing: response))"
+                self.text.text = response?[0].title
             }
         }
     }

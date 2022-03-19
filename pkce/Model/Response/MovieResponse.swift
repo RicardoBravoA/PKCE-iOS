@@ -15,6 +15,4 @@ struct MovieResponseItem: Codable {
     let id: Int
     let title: String
     let diector: String
-    let year: Int
-    let rating: Float
 }

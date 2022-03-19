@@ -29,15 +29,22 @@ class ApiClient {
         }
     }
     
-    class func taskForGETRequest<ResponseType: Decodable>(url: URL, response: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
+    private class func taskForGETRequest<ResponseType: Decodable>(url: URL, response: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+        var request = URLRequest(url: url)
+        let code = self.encode(path: url.path, verb: "get", body: "{}")
+        print(code)
+        request.httpMethod = "GET"
+        request.setValue(code, forHTTPHeaderField: "request-id")
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 DispatchQueue.main.async {
                     completion(nil, error)
                 }
                 return
             }
+            
             let decoder = JSONDecoder()
             do {
                 let response = try decoder.decode(ResponseType.self, from: data)
@@ -60,7 +67,7 @@ class ApiClient {
         task.resume()
     }
     
-    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, body: RequestType, response: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
+    private class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, body: RequestType, response: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -95,6 +102,11 @@ class ApiClient {
             }
         }
         task.resume()
+    }
+    
+    private class func encode(path: String, verb: String, body: String) -> String {
+        print("\(path)\(verb)\(body)")
+        return ("\(path)\(verb)\(body)".data(using: .utf8)?.base64EncodedString())!
     }
     
 }
