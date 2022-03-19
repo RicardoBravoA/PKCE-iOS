@@ -9,10 +9,10 @@ import Foundation
 
 class ApiClient {
     
-    class func movie(completion: @escaping (MovieResponse?, Error?) -> Void) {
+    class func movie(completion: @escaping ([MovieResponseItem]?, Error?) -> Void) {
         taskForGETRequest(url: EndPoint.movie.url, response: MovieResponse.self) { response, error in
             if let response = response {
-                completion(response, nil)
+                completion(response.results, nil)
             } else {
                 completion(nil, error)
             }

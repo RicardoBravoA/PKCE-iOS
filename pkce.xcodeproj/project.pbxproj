@@ -22,6 +22,7 @@
 		C624BC0827E5BDC200B8AC8B /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C624BC0727E5BDC200B8AC8B /* MovieResponse.swift */; };
 		C624BC0A27E5BE2A00B8AC8B /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C624BC0927E5BE2A00B8AC8B /* ApiClient.swift */; };
 		C624BC0C27E5BE7F00B8AC8B /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C624BC0B27E5BE7F00B8AC8B /* ErrorResponse.swift */; };
+		C624BC0F27E5C0F100B8AC8B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C624BC0E27E5C0F100B8AC8B /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		C624BC0727E5BDC200B8AC8B /* MovieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 		C624BC0927E5BE2A00B8AC8B /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		C624BC0B27E5BE7F00B8AC8B /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
+		C624BC0E27E5C0F100B8AC8B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 		C624BBCB27E5B73600B8AC8B /* pkce */ = {
 			isa = PBXGroup;
 			children = (
+				C624BC0D27E5C0E000B8AC8B /* Controller */,
 				C624BC0027E5BD0B00B8AC8B /* Model */,
 				C624BBFD27E5BB3E00B8AC8B /* Api */,
 				C624BBCC27E5B73600B8AC8B /* AppDelegate.swift */,
@@ -183,6 +186,14 @@
 				C624BC0B27E5BE7F00B8AC8B /* ErrorResponse.swift */,
 			);
 			path = Response;
+			sourceTree = "<group>";
+		};
+		C624BC0D27E5C0E000B8AC8B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C624BC0E27E5C0F100B8AC8B /* MainViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,6 +336,7 @@
 				C624BC0C27E5BE7F00B8AC8B /* ErrorResponse.swift in Sources */,
 				C624BBFF27E5BB6200B8AC8B /* EndPoint.swift in Sources */,
 				C624BBCF27E5B73600B8AC8B /* SceneDelegate.swift in Sources */,
+				C624BC0F27E5C0F100B8AC8B /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

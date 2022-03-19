@@ -14,6 +14,6 @@ struct ErrorResponse: Codable {
 
 extension ErrorResponse: LocalizedError {
     var errorDescription: String? {
-        return error
+        return message
     }
 }
