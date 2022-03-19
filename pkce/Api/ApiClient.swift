@@ -33,7 +33,6 @@ class ApiClient {
         
         var request = URLRequest(url: url)
         let code = self.encode(path: url.path, verb: "get", body: "{}")
-        print(code)
         request.httpMethod = "GET"
         request.setValue(code, forHTTPHeaderField: "request-id")
         
@@ -72,7 +71,12 @@ class ApiClient {
         urlRequest.httpMethod = "POST"
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        urlRequest.httpBody = try! JSONEncoder().encode(body)
+        let bodyJson = try! JSONEncoder().encode(body)
+        
+        let code = self.encode(path: url.path, verb: "post", body: String(data: bodyJson, encoding: .utf8)!)
+        urlRequest.setValue(code, forHTTPHeaderField: "request-id")
+        
+        urlRequest.httpBody = bodyJson
         
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             guard let data = data else {
@@ -105,8 +109,13 @@ class ApiClient {
     }
     
     private class func encode(path: String, verb: String, body: String) -> String {
-        print("\(path)\(verb)\(body)")
-        return ("\(path)\(verb)\(body)".data(using: .utf8)?.base64EncodedString())!
+        if (verb == "get") {
+            return ("\(path)\(verb)\(body)".data(using: .utf8)?.base64EncodedString())!
+        } else {
+            let newBody = body.replacingOccurrences(of: "\"", with: "")
+            return ("\(path)\(verb)\(newBody)".data(using: .utf8)?.base64EncodedString())!
+        }
+        
     }
     
 }

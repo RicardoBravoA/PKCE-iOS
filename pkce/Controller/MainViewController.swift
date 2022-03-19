@@ -30,5 +30,13 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func post(_ sender: Any) {
+        let request = TransactionRequest(clientId: "100", amount: "100")
+        ApiClient.transaction(request: request, completion: { response, error in
+            if error != nil {
+                self.text.text = error?.localizedDescription ?? "Error..."
+            } else {
+                self.text.text = response?.message
+            }
+        })
     }
 }
